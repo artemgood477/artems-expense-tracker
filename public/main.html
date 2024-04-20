@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <style>
+        html {
+            height: 100%;
+            background-image: linear-gradient(to right top, #8e44ad 0%, #3498db 100%);
+        }
+
+        nav {
+            max-width: 960px;
+            mask-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #ffffff 25%, #ffffff 75%, rgba(255, 255, 255, 0) 100%);
+            margin: -70px auto;
+            padding: 60px 0;
+        }
+
+        nav ul {
+            text-align: center;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 25%, rgba(255, 255, 255, 0.2) 75%, rgba(255, 255, 255, 0) 100%);
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
+        }
+
+        nav ul li {
+            display: inline-block;
+        }
+
+        nav ul li a {
+            padding: 18px;
+            font-family: "Open Sans";
+            text-transform: uppercase;
+            color: rgba(0, 35, 122, 0.5);
+            font-size: 18px;
+            text-decoration: none;
+            display: block;
+        }
+
+        nav ul li a:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(0, 35, 122, 0.7);
+        }
+
+        .main-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding: 0 20px;
+        }
+
+        #addExpenseSection,
+        #expensesDisplaySection {
+            background-color: rgba(255, 255, 255, 0.2); /* Translucent white overlay */
+            border-radius: 10px;
+            padding: 20px;
+            width: 45%; /* Adjusted width */
+        }
+
+        #addExpenseSection h2,
+        #expensesDisplaySection h2 {
+            font-family: "Open Sans";
+            color: rgba(0, 35, 122, 0.7); /* Match the color of navbar buttons */
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        #addExpenseSection label,
+        #expensesDisplaySection label {
+            font-family: "Open Sans";
+            color: rgba(0, 35, 122, 0.7); /* Match the color of navbar buttons */
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        #expensesDisplaySection ul li {
+            font-family: "Open Sans";
+            color: rgba(0, 35, 122, 0.7); /* Match the color of navbar buttons */
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+
+        #addExpenseSection input[type="text"],
+        #addExpenseSection input[type="number"],
+        #addExpenseSection select,
+        #expensesDisplaySection select,
+        #addExpenseSection input[type="date"] {
+            display: block;
+            width: calc(100% - 20px); /* Adjusted width */
+            margin: 5px auto; /* Adjusted margin */
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-family: "Open Sans";
+            color: rgba(0, 35, 122, 0.7); /* Match the color of navbar buttons */
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.1); /* Translucent white overlay */
+            box-shadow: inset 0 0 1px rgba(255, 255, 255, 0.6);
+        }
+
+        #addExpenseSection button[type="submit"] {
+            cursor: pointer;
+            background-color: transparent; /* Transparent background */
+            color: rgba(0, 35, 122, 0.7); /* Match the color of navbar buttons */
+            padding: 10px; /* Added padding */
+            font-family: "Open Sans";
+            font-size: 16px;
+            transition: background-color 0.3s;
+            display: block;
+            margin: 10px auto; /* Center the button */
+            border: none; /* Remove border */
+
+        }
+
+        #addExpenseSection button[type="submit"]:hover {
+            background-color: rgba(0, 35, 122, 0.1); /* Darken the color on hover */
+        }
+
+        #expensesDisplaySection p {
+            font-family: "Open Sans";
+            color: rgba(0, 35, 122, 0.7); /* Match the color of navbar buttons */
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        #expensesDisplaySection p span {
+            font-weight: bold;
+        }
+
+        /* Logout Button */
+        #logoutButton {
+            margin-top: 20px;
+            padding: 10px; /* Added padding */
+            border: none;
+            border-radius: 5px;
+            font-family: "Open Sans";
+            color: rgba(0, 35, 122, 0.7); /* Match the color of navbar buttons */
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.1); /* Translucent white overlay */
+            box-shadow: inset 0 0 1px rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+        }
+
+        #logoutButton:hover {
+            background-color: rgba(0, 35, 122, 0.1); /* Darken the color on hover */
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li>
+                <a href="/login.html">Log out</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="main-container">
+        <!-- Add Expense Section -->
+        <section id="addExpenseSection">
+            <h2>Add Expense</h2>
+            <form id="expenseForm">
+                <input type="text" id="itemName" placeholder="Enter item name" required><br>
+                <input type="number" id="amount" placeholder="Enter amount" required><br>
+                <select id="category">
+                    <option value="">Select Category</option>
+                    <option value="Food">Food</option>
+                    <option value="Transportation">Transportation</option>
+                    <option value="Housing">Housing</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Utilities">Utilities</option>
+                    <option value="Clothing">Clothing</option>
+                    <option value="Healthcare">Healthcare</option>
+                    <option value="Education">Education</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Gifts">Gifts</option>
+                    <option value="Other">Other</option>
+                </select><br>
+                <input type="date" id="date" placeholder="Select date" required><br>
+                <button type="submit">Add Expense</button>
+            </form>
+        </section>
+
+        <!-- Expenses Display Section -->
+        <section id="expensesDisplaySection">
+            <h2>Expenses</h2>
+            <label for="monthSelect">Select Month:</label>
+            <select id="monthSelect">
+                <option value="">All Time</option>
+                <option value="01">January</option>
+                <option value="02">February</option>
+                <option value="03">March</option>
+                <option value="04">April</option>
+                <option value="05">May</option>
+                <option value="06">June</option>
+                <option value="07">July</option>
+                <option value="08">August</option>
+                <option value="09">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select><br><br>
+            <ul id="expensesList"></ul>
+            <p>Total Expenses: <span id="totalExpenses"></span></p>
+        </section>
+    </div>
+
+    <script>
+        // Add expense form submission
+        document.getElementById('expenseForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const itemName = document.getElementById('itemName').value;
+            const amount = document.getElementById('amount').value;
+            const category = document.getElementById('category').value;
+            const date = document.getElementById('date').value;
+
+            // Send request to add expense
+            const response = await fetch('/expenses', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ userId: localStorage.getItem('userId'), description: itemName, amount, category, date })
+            });
+
+            if (response.ok) {
+                fetchExpenses(); // Refresh expenses list
+                document.getElementById('itemName').value = '';
+                document.getElementById('amount').value = '';
+                document.getElementById('category').value = '';
+                document.getElementById('date').value = '';
+            } else {
+                alert('Failed to add expense');
+            }
+        });
+
+        // Fetch and display expenses
+        async function fetchExpenses() {
+            const month = document.getElementById('monthSelect').value;
+            const response = await fetch(`/expenses?userId=${localStorage.getItem('userId')}&month=${month}`);
+            const expenses = await response.json();
+            const expensesList = document.getElementById('expensesList');
+            const totalExpenses = document.getElementById('totalExpenses');
+            let totalAmount = 0;
+            expensesList.innerHTML = '';
+            expenses.forEach(expense => {
+                const li = document.createElement('li');
+                li.textContent = `${expense.description}: $${expense.amount} (${expense.category}) - ${new Date(expense.date).toLocaleDateString()}`;
+                expensesList.appendChild(li);
+                totalAmount += expense.amount;
+            });
+            totalExpenses.textContent = `$${totalAmount.toFixed(2)}`;
+        }
+
+        // Initial fetch on page load
+        window.onload = () => {
+            fetchExpenses();
+        };
+
+        
+
+        // Listen for month select change
+        document.getElementById('monthSelect').addEventListener('change', fetchExpenses);
+    </script>
+</body>
+</html>
